@@ -18,4 +18,4 @@ Este projeto simula um formulário com validação de email e confirmação de s
 
 ## 👨‍💻 Autor
 
-Guilhermy Gabriel
+GUILHERMY GABRIEL
