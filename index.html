@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Meu primeiro sistema</title>
+  <style>
+    * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1e1e2f, #3a3a5c);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+form {
+  background: #ffffff;
+  width: 100%;
+  max-width: 380px;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+form h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #222;
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 8px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  font-size: 15px;
+  outline: none;
+}
+
+input:focus {
+  border-color: #5b5cff;
+}
+
+input:focus:invalid {
+  border-color: #e63946;
+}
+
+input:focus:valid {
+  border-color: #2a9d8f;
+}
+
+p {
+  font-size: 13px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background: #5b5cff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #4343d8;
+  transform: scale(1.02);
+}
+  </style>
+
+</head>
+<body>
+
+  <form id="formulario">
+  <h2>Cadastro de usuário</h2>
+
+  <input type="text" placeholder="Nome completo" required>
+
+  <input type="email" id="email" placeholder="Email" required>
+  <p id="mensagemEmail"></p>
+
+  <input type="password" id="senha" placeholder="Senha" minlength="6" required>
+
+  <input type="password" id="confirmar" placeholder="Confirmar senha" minlength="6" required>
+  <p id="msgconfirmar"></p>
+
+  <button type="submit">Criar conta</button>
+</form>
+
+  <script>
+    
+    const email = document.getElementById("email");
+    const mensagemEmail = document.getElementById("mensagemEmail");
+    email.addEventListener("input", function(){
+        if (email.value === ""){
+            mensagemEmail.textContent = "";
+        } else if (email.validity.valid) {
+            mensagemEmail.textContent = "Email válido ✅";
+            mensagemEmail.style.color = "green";
+        } else {
+            mensagemEmail.textContent = "Digite um email válido ❌ ";
+            mensagemEmail.style.color = "red";
+        }
+    });
+
+    const formulario = document.getElementById("formulario")
+    const senha = document.getElementById("senha");
+    const confirmar = document.getElementById("confirmar");
+    const msgConfirmar = document.getElementById("msgconfirmar");
+
+    confirmar.addEventListener("input", function() {
+        // se estiver vazio não mostra nada
+        if(confirmar.value === ""){
+        msgConfirmar.textContent = "";
+        return;
+        }
+
+        // Se for igual
+        if (senha.value === confirmar.value) {
+            msgConfirmar.textContent = "Senha iguais ✅ ";
+            msgConfirmar.style.color = "green";
+        } else {
+            msgConfirmar.textContent = "Senhas diferentes ❌ ";
+            msgConfirmar.style.color = "red";
+        }
+
+    });
+    
+    formulario.addEventListener("submit", function(event) {
+        if (senha.value !== confirmar.value) {
+            event.preventDefault();
+            msgConfirmar.textContent = " Corrija as senhas antes de enviar ❌";
+            msgConfirmar.style.color = "red";
+        }
+    })
+  </script>
+
+</body>
+</html>
